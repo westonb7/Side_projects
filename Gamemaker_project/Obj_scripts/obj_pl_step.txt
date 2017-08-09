@@ -1,0 +1,320 @@
+
+
+// Get the player's input
+
+key_right = max(keyboard_check(vk_right),keyboard_check(ord("D")),0);
+key_left = -max(keyboard_check(vk_left),keyboard_check(ord("A")),0);
+key_jump = keyboard_check_pressed(vk_space);
+key_jump_held = keyboard_check(vk_space);
+key_down = keyboard_check(vk_down);
+bowAngle = point_direction(x, y, mouse_x, mouse_y);
+bowFace = 1;
+
+moveOn = max(keyboard_check(ord("T")),0);
+
+// Moving on with food
+
+if (itemHave > 0 && moveOn > 0)
+{
+    room_goto_next();
+}
+
+if (itemHave > 0)
+{
+
+};
+
+if ( bowAngle > 200 && bowAngle < 340 )
+    {   bowFace = 0;    }
+else if ( (bowAngle <= 200 && bowAngle >= 155) || (bowAngle >= 330) || (bowAngle <= 25))
+    {   bowFace = 1;    }
+else if ( (bowAngle > 25 && bowAngle <= 70) || (bowAngle >= 110 && bowAngle < 155))
+    {   bowFace = 2;    }
+else if ( bowAngle > 70 && bowAngle < 110 )
+    {   bowFace = 3;    }  
+    
+// Invincibility after hit
+if (just_hit > 0 && just_hit < 31)
+{
+    just_hit += 1;
+    image_alpha = (just_hit % 2);
+}
+
+if (just_hit >= 30)
+{
+    just_hit = 0;
+    image_alpha = 1;
+    
+}   
+        
+// React to the player's inputs
+
+move = key_left + key_right;
+
+hsp = move * movespeed;
+    
+if (vsp < 10) vsp += grav;
+
+// jump mechanic
+
+if (place_meeting(x,y+1,oWall))
+{
+  jumps = jumpsMax;
+  grounded = true;
+}
+else
+    grounded = false;
+
+// Double jump mechanics
+
+if (getReady == false)
+{
+    
+    if ((key_jump) && jumps > 0) 
+    {
+        if (grounded == true)
+        {
+            jumps -= 1;    
+            vsp = -jumpspeed;
+            audio_play_sound(sdJump,0,0);
+        }
+        else
+        {
+            jumps -= 2;
+            vsp = -jumpspeed_air;
+            audio_play_sound(sdJump,0,0);
+        }
+    
+    }
+}
+   
+// allows jump height to be dependent on how long space is pressed
+if ((vsp < 0) && (!key_jump_held)) vsp = max(vsp, -jumpspeed/3)
+
+
+// Movement with a moving platform
+if (getReady == true)
+{
+    hsp = 0;
+}
+var hsp_final = hsp + hsp_carry;
+hsp_carry = 0;
+
+// Horozontal colision detector
+if (place_meeting(x+hsp_final,y,oWall))
+{
+    while(!place_meeting(x+sign(hsp_final),y,oWall))  // Detect the player about to hit the wall
+    {
+        x += sign(hsp_final); // moves the player to the wall
+    }
+    hsp_final = 0;            // Stops the player with the collision
+    hsp = 0;
+    hsp_knockback = 0;
+    
+    x = xprevious;
+}
+
+// knockback mechanics
+
+if (hsp_knockback != 0 && isDead == 0)
+{
+    if ( isDead == 0 )
+    {
+        x += hsp_knockback;
+    }
+    knock_counter += 1;
+    if (knock_counter == 20)
+    {   
+        knock_counter = 0;
+        hsp_knockback = 0;
+    }
+}
+else if (hsp_knockback == 0 && isDead == 0)
+{
+    x += hsp_final;
+}
+
+// Vertical colision detector
+if (place_meeting(x,y+vsp,oWall))
+{
+    while(!place_meeting(x,y+sign(vsp),oWall))
+    {
+        y += sign(vsp);
+    }
+    y = yprevious;
+    vsp = 0;
+}
+
+
+
+// makes bullets on mouse click
+/*
+if mouse_check_button_pressed(mb_any) 
+{ 
+    myBullet = instance_create(x, y, oBullet);
+    myBullet.direction = point_direction(x, y, mouse_x, mouse_y);
+    myBullet.image_angle = myBullet.direction;
+    myBullet.speed = 20;
+}
+*/
+
+//x += hsp;
+if (isDead == 0)
+{
+    y += vsp;
+}
+
+// Animation
+
+if (move != 0) image_xscale = (-move);
+
+if ( mouse_check_button_pressed(mb_left) && vsp == 0 && tooEarly == false)
+    {   
+       sprite_index = sPlayer_getready;
+       getReady = true;
+       alarm[1] = 30;
+    }
+
+
+    
+if (mouse_check_button_released(mb_left) && isReady == false && getReady == true && isDead == 0)
+{
+    getReady = false;
+    tooEarly = true;
+}
+    
+if (mouse_check_button_released(mb_left) && isReady == true && isDead == 0)
+{
+    myBullet = instance_create(x, y, oBullet);
+    myBullet.direction = point_direction(x, y, mouse_x, mouse_y - 40);
+    myBullet.image_angle = myBullet.direction;
+    myBullet.speed = arrowSpeed;
+    
+    audio_play_sound(sdShoot,0,0);
+    
+    if (global.doubleShot == true)
+    {
+    myBullet = instance_create(x, y, oBullet_02);
+    myBullet.direction = point_direction(x, y, mouse_x, mouse_y - 40);
+    myBullet.image_angle = myBullet.direction;
+    myBullet.speed = arrowSpeed;
+    }
+    isReady = false;
+    switch (bowFace)
+    {
+        case 0:
+        {
+            sprite_index = sPlayer_shoot_st_downside
+            break;
+        }
+        case 1:
+        {
+            sprite_index = sPlayer_shoot_st_forward
+            break;
+        }
+        case 2:
+        {
+            sprite_index = sPlayer_shoot_st_upside
+            break;
+        }
+        case 3:
+        {
+            sprite_index = sPlayer_shoot_st_up
+            break;
+        }    
+    }
+}
+    
+if (isReady == false && getReady == false)
+{
+    if (vsp == 0 && hsp !=0)
+    {   sprite_index = sPlayer_walk;    }
+    else if (vsp < 0 )
+    {   sprite_index = sPlayer_jump;    }
+    else if (vsp > 0 )
+    {   sprite_index = sPlayer_fall;    }
+    else if (vsp == 0 && hsp == 0) 
+    {   sprite_index = sPlayer_stand;   }
+  
+}
+
+if (isReady == true && getReady == false)
+{
+    if (bowAngle < 90 || bowAngle > 270)
+    {   image_xscale = -1;  }
+    else
+    {   image_xscale = 1;   }
+    
+    switch (bowFace)
+    {
+        case 0:
+        {   
+            if (vsp == 0 && hsp !=0)
+            {   sprite_index = sPlayer_walkR_downside;    }
+            else if (vsp < 0 )
+            {   sprite_index = sPlayer_jumpR_downside;    }
+            else if (vsp > 0 )
+            {   sprite_index = sPlayer_fallR_downside;    }
+            else if (vsp == 0 && hsp == 0) 
+            {   sprite_index = sPlayer_ready_st_downside;   }
+            break;
+        }
+        case 1:
+        {
+            if (vsp == 0 && hsp !=0)
+            {   sprite_index = sPlayer_walkR_f;    }
+            else if (vsp < 0 )
+            {   sprite_index = sPlayer_jumpR_forward;    }
+            else if (vsp > 0 )
+            {   sprite_index = sPlayer_fallR_f;    }
+            else if (vsp == 0 && hsp == 0) 
+            {   sprite_index = sPlayer_ready_st_forward;   }
+            break;
+        }
+        case 2:
+        {
+            if (vsp == 0 && hsp !=0)
+            {   sprite_index = sPlayer_walkR_upside;    }
+            else if (vsp < 0 )
+            {   sprite_index = sPlayer_jumpR_upside;    }
+            else if (vsp > 0 )
+            {   sprite_index = sPlayer_fallR_upside;    }
+            else if (vsp == 0 && hsp == 0) 
+            {   sprite_index = sPlayer_ready_st_upside;   }
+            break;
+        }
+        case 3:
+        {
+            if (vsp == 0 && hsp !=0)
+            {   sprite_index = sPlayer_walkR_up;    }
+            else if (vsp < 0 )
+            {   sprite_index = sPlayer_jumpR_up;    }
+            else if (vsp > 0 )
+            {   sprite_index = sPlayer_fallR_up;    }
+            else if (vsp == 0 && hsp == 0) 
+            {   sprite_index = sPlayer_ready_st_up;   }
+            break;
+        }
+    }
+}
+
+if (just_hit > 1 && just_hit < 10)
+{
+    sprite_index = sPlayer_hit;
+}
+
+
+if (vsp > 0)    {   dir = 1;    }
+else if (vsp < 0)   {   dir = -1;   }
+
+// death mechanics
+
+if (isDead = 1)
+{
+    image_alpha = 0;
+}
+
+
+;
+
+

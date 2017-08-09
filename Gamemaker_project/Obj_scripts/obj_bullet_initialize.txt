@@ -1,0 +1,3 @@
+numBounces = 0;
+grav = 0.2;
+vsp = 0;

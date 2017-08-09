@@ -1,0 +1,3 @@
+key_restart = 0;
+
+scr_text("  Thank you for playing!  # Game created by Weston Bodily # Music by Mark Sparling # Press 'R' to restart # Press 'Q' to quit #   #  ",0.5,view_xview[0]+100,view_yview[0]+100)

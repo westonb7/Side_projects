@@ -1,0 +1,159 @@
+
+switch (state)
+{
+    case e_state.idle:
+    {
+        if ( (hsp > -0.2) && (hsp < 0.2))
+        {   hsp = 0;    }
+        else if (hsp > 0.1)
+        {   hsp -= slowSpeed    }
+        else if (hsp < -0.1)
+        {   hsp += slowSpeed    }
+        if (distance_to_object(oPlayer) < 200) 
+            state = e_state.chase;
+    }
+    break;
+    case e_state.chase:
+    {
+        dir = sign(oPlayer.x - x);
+        if( (hsp <= maxHsp) && (hsp >= -(maxHsp)))
+        {
+            hsp += dir * movespeed;
+        }
+        if ( hsp > maxHsp)
+        {   hsp = maxHsp;    }
+        if ( hsp < -maxHsp)
+        {   hsp = -maxHsp;   }
+        if (distance_to_object(oPlayer) > 350)
+            state = e_state.idle;
+        fireCounter += 1;
+    
+        if (fireCounter == fireFreq)
+        {
+            myFireball = instance_create(x, y, oFireball);
+            myFireball.direction = point_direction(x, y, x+20, y+100);
+            myFireball.image_angle = myFireball.direction;
+            myFireball.speed = fireSpeed;
+            myFireball2 = instance_create(x, y, oFireball);
+            myFireball2.direction = point_direction(x, y, x-20, y+100);
+            myFireball2.image_angle = myFireball.direction;
+            myFireball2.speed = fireSpeed;
+            fireCounter = 0;
+            
+        }
+    }
+    break;
+    
+}
+
+// floaty motions
+
+
+if (resetOne == true)
+{   vsp -= floatSpeed;  }
+if (resetTwo == true)
+{   vsp += floatSpeed;   }
+if (vsp >= maxVsp)
+{   
+    resetOne = true;
+    resetTwo = false;
+}
+if (vsp <= -maxVsp)
+{   
+    resetOne = false;
+    resetTwo = true;
+}
+
+y += vsp;
+
+//hsp = dir * movespeed;
+vsp += grav;
+
+// Horozontal colision detector
+if (place_meeting(x+hsp,y,oWall))
+{
+    while(!place_meeting(x+sign(hsp),y,oWall))  // Detect the enemy about to hit the wall
+    {
+        x += sign(hsp); // moves the enemy to the wall
+    }
+    hsp = 0;            // Stops the enemy with the collision
+
+    dir *= -1;
+}
+
+x += hsp;
+
+// Vertical colision detector
+if (place_meeting(x,y+vsp,oWall))
+{
+    while(!place_meeting(x,y+sign(vsp),oWall))
+    {
+        //y += sign(vsp);
+    }
+    //vsp = 0;
+    
+    //enemy will turn around if it comes to a ledge
+    
+    
+}
+
+//y += vsp;
+
+// Enemy collision (Jump)
+
+if (place_meeting(x,y,oPlayer))
+{
+
+    if (oPlayer.x < x-16)
+    {
+        with (oPlayer) dir = 1; 
+        
+    }
+    
+    else if (oPlayer.x > x + 16)
+    {
+        with (oPlayer) dir = -1;
+    }  
+    {
+        scr_player_hit();
+    }
+    
+}
+
+
+// bullet collision
+
+incomingBullet = instance_place(x, y, oBullet)
+
+if instance_exists(incomingBullet)
+{
+    just_hit = 1;
+    hitPoints -= 1;
+    audio_play_sound(sdHit,0,0);
+    
+    state = e_state.chase;
+    
+    if (hitPoints == 0)
+    {   
+        mmyExplosion = instance_create(x,y, oExplosion)
+        instance_destroy(); 
+        audio_play_sound(sdExplosion,0,0);
+    }
+    
+    with incomingBullet
+    {
+        instance_destroy();
+    };
+}
+
+if (just_hit > 0)
+{
+    just_hit += 1;
+    sprite_index = sWing_hit;
+}
+if (just_hit == 10)
+{
+    sprite_index = sprite_original;
+    just_hit = 0;
+}
+

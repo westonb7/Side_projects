@@ -1,0 +1,13 @@
+key_advance = max(0,keyboard_check(ord("T")))
+
+
+
+if ((key_advance == 1) && (goneAlready == false))
+{
+    myFade = instance_create(x,y,oFade_transition);
+    goneAlready = true;
+}
+
+
+
+

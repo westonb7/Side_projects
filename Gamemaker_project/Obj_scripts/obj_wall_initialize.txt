@@ -1,0 +1,13 @@
+// destroy bullets
+incomingBullet = instance_place(x, y, oBullet)
+
+if instance_exists(incomingBullet)
+{
+    with incomingBullet{
+        instance_destroy();
+    };
+    
+}
+
+
+

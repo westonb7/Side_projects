@@ -1,0 +1,16 @@
+if (audio_is_playing(sd_cutscenes_lighter))
+{
+    audio_stop_sound(sd_cutscenes_lighter);
+}
+
+if (audio_is_playing(sd_level4))
+{
+    audio_stop_sound(sd_level4);
+}
+
+
+if (!audio_is_playing(sd_level5))
+{
+    audio_play_sound(sd_level5,0,20)
+    
+};

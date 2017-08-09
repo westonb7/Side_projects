@@ -1,0 +1,10 @@
+//initialize
+
+hsp = 0;
+vsp = -9;
+grav = 0.2;
+movespeed = irandom_range(2,5);
+dir = irandom_range(-1,1);
+
+image_xscale = 2;
+image_yscale = 2;

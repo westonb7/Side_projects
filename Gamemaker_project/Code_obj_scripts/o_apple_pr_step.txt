@@ -1,0 +1,12 @@
+counterCut += 1;
+
+if (counterCut == 30) || (counterCut == 60) || (counterCut == 90)
+{
+    myApple = instance_create(x,y,oApple_purple_cut);
+};
+
+if (counterCut == 190)
+{
+    myFade = instance_create(x,y,oFade_transition_white);
+};
+

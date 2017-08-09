@@ -1,0 +1,6 @@
+timerNum += 1;
+
+if (timerNum == 9)
+{
+    instance_destroy();
+}

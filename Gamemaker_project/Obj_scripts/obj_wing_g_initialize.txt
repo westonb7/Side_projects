@@ -1,0 +1,22 @@
+state = e_state.idle;
+
+maxHp = 1;
+maxVsp = 2;
+maxHsp = 2;
+floatSpeed = 0.3;
+vsp = 0;
+grav = 0.2;
+resetOne = true;
+resetTwo = false;
+fireCounter = 0;
+idleCounter = 0;
+fireSpeed = 5;
+just_hit = 0;
+hitPoints = 4;
+sprite_original = sEWing_gray;
+fireFreq = 40;
+
+hsp = 0;
+dir = 0;
+movespeed = 0.06;
+slowSpeed = 0.1;

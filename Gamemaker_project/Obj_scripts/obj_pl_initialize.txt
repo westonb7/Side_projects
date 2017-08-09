@@ -1,0 +1,42 @@
+// Initialize variables
+grav = 0.2;
+hsp = 0;
+hsp_carry = 0;
+hsp_knockback = 0;
+knock_counter = 0;
+just_hit = 0;
+vsp = 0;
+movespeed = 3;
+jumps = 0;
+bowAngle = 0;
+arrowSpeed = 10;
+hitPoints = global.playerMaxHP;
+dir = 1;
+
+isDead = 0;
+
+itemHave = 0;
+moveOn = 0;
+
+
+jumpsMax = 2;
+
+isReady = false;
+getReady = false;
+tooEarly = false;
+
+jumpspeed_normal = 5;
+jumpspeed_powerup = 7;
+jumpspeed_air_nor = 4;
+jumpspeed_air_pow = 5;
+jumpspeed = jumpspeed_normal;
+jumpspeed_air = jumpspeed_air_nor;
+
+if (global.checkpointR == room)
+{
+    x = global.checkpointx;
+    y = global.checkpointy;
+    
+}
+
+key_down = 0;

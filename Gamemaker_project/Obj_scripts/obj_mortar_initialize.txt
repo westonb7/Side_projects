@@ -1,0 +1,9 @@
+//initialize
+
+hsp = 0;
+vsp = -6;
+grav = 0.2;
+movespeed = irandom_range(1,4);
+dir = irandom_range(-1,1);
+
+

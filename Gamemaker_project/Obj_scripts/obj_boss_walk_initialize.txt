@@ -1,0 +1,20 @@
+/// Initialize variables
+
+state = e_state.idle;
+
+maxHp = 1;
+
+fireCounter = 0;
+idleCounter = 0;
+fireSpeed = 6;
+just_changed = 0;
+just_hit = 0;
+hitPoints = 8;
+
+dir = -1;
+movespeed = 1;
+grav = 0.2;
+hsp = 0;
+vsp = 0;
+fearOfHeights = 0;
+sprite_original = sEye_walk_boss;

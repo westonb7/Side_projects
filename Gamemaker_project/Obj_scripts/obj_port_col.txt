@@ -1,0 +1,7 @@
+with(oPlayer)
+{
+    instance_create(x,y, oFade_transition_2);
+
+}
+
+instance_destroy();

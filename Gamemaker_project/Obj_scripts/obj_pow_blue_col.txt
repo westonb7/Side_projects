@@ -1,0 +1,9 @@
+with(oPlayer)
+{
+    jumpspeed = jumpspeed_powerup;
+    jumpspeed_air = jumpspeed_air_pow;
+    //sprite_index = sPlayer_b;
+    alarm[0] = 300;
+}
+
+instance_destroy();

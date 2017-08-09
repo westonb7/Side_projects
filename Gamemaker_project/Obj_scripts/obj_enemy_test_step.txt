@@ -1,0 +1,66 @@
+hsp = dir * movespeed;
+vsp += grav;
+
+// Horozontal colision detector
+if (place_meeting(x+hsp,y,oWall))
+{
+    while(!place_meeting(x+sign(hsp),y,oWall))  // Detect the player about to hit the wall
+    {
+        x += sign(hsp); // moves the player to the wall
+    }
+    hsp = 0;            // Stops the player with the collision
+
+    dir *= -1;
+}
+
+x += hsp;
+
+// Vertical colision detector
+if (place_meeting(x,y+vsp,oWall))
+{
+    while(!place_meeting(x,y+sign(vsp),oWall))
+    {
+        y += sign(vsp);
+    }
+    vsp = 0;
+    
+    //enemy will turn around if it comes to a ledge
+    if (fearOfHeights) && !position_meeting(x+(sprite_width/2)*dir, y +(sprite_height/2) + 8, oWall)
+    {
+        dir *= -1;
+    }
+    
+}
+
+y += vsp;
+
+// Enemy collision
+if (place_meeting(x,y,oPlayer))
+{
+    if (oPlayer.y < y-16)
+    {
+        with (oPlayer) vsp = -jumpspeed;    // bounce off the enemy
+        instance_destroy();                 // destroy the enemy
+    }
+    
+    else
+    {
+        scr_death();
+    }
+    
+}
+
+// bullet collision
+
+incomingBullet = instance_place(x, y, oBullet)
+
+if instance_exists(incomingBullet)
+{
+    instance_destroy();
+    
+    with incomingBullet{
+        instance_destroy();
+    };
+}
+
+

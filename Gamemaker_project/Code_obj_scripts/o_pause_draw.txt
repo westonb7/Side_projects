@@ -1,0 +1,38 @@
+key_restart = max(keyboard_check(ord("R")),0);
+key_quit = max(keyboard_check(ord("Y")),0);
+key_skip = max(keyboard_check(ord("Q")),0);
+
+if (key_restart == 1 && pause == 1)
+{
+    pause = 0;
+    room_restart();
+}
+
+
+if (key_skip == 1 && pause == 1)
+{
+    pause = 0;
+    game_end();
+}
+
+
+
+if (pause == 1)
+{
+    depth = -100
+    draw_set_color(c_black);
+    draw_set_alpha(0.5);
+    draw_rectangle(view_xview[0],view_yview[0],view_wview[0]+view_xview[0],view_hview[0]+view_yview[0],0);
+    //draw_rectangle(0,0,room_width,room_height,0);
+    draw_set_halign(fa_center);
+    draw_set_font(font_menu);
+    draw_set_alpha(1);
+    draw_text(view_xview[0]+250,view_yview[0]+150,"Paused");
+    //draw_text(room_width/2,room_height/2,"Paused");
+    draw_set_color(c_black);
+    
+    draw_set_font(font_small_vcr);
+    draw_text(view_xview[0] + 250,view_yview[0]/2 + 250, "Press R to restart");
+        draw_text(view_xview[0] + 250,view_yview[0]/2 + 270, "Press Q to quit");
+    
+}

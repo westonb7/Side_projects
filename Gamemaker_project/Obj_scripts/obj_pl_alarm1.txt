@@ -1,0 +1,13 @@
+getReady = false;
+
+if (tooEarly == false)
+{
+    isReady = true;
+    sprite_index = sPlayer_ready_st_forward;
+}
+else if (tooEarly == true)
+{   
+    isReady = false;
+    tooEarly = false;
+    sprite_index = sPlayer_stand;
+}

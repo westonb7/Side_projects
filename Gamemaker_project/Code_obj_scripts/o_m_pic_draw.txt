@@ -1,0 +1,29 @@
+draw_set_halign(fa_left);
+draw_set_valign(fa_middle);
+draw_set_font(font_4);
+draw_set_color(c_white);
+/*
+var m;
+for (m = 0; m < array_length_1d(menu); m += 1)
+{
+    draw_text (x + space, y + (m * space), string(menu[m]))
+
+}
+
+draw_sprite(sprite_index, 0, x + 16, y + mpos * space);
+*/
+draw_set_font(font_menu3);
+draw_text (60, 110, "Arcane#Apple#Basket");
+/*
+draw_set_font(font_menu2);
+draw_set_color(c_gray);
+
+draw_text (160, 450, "A + D to move")
+draw_text (160, 500, "Spacebar to jump")
+draw_text (160, 550, "Click and hold to ready a shot")
+draw_text (160, 580, "release click to shoot")
+draw_text (160, 650, "Game Created by Weston Bodily")
+draw_text (160, 700, "Music by Mark Sparling")
+
+*/
+

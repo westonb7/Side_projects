@@ -1,0 +1,5 @@
+isHit = 0;
+dropSprite = sApple_b_drop;
+vsp = 0;
+grav = 0;
+

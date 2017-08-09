@@ -1,0 +1,38 @@
+mask_index = sPlatformMove;     // keeps the platform from going through walls when above the player
+
+
+hsp = dir * movespeed;
+
+// Horozontal colision detector
+if (place_meeting(x+hsp,y,oWall))
+{
+    while(!place_meeting(x+sign(hsp),y,oWall))  // Detect the player about to hit the wall
+    {
+        x += sign(hsp); // moves the player to the wall
+    }
+    hsp = 0;            // Stops the player with the collision
+
+    dir *= -1;
+}
+
+x += hsp;
+
+// safety check
+
+if (instance_exists(oPlayer))
+{
+    if (round(oPlayer.y + (oPlayer.sprite_height/2.5)) > y) || (oPlayer.key_down) 
+    {
+        mask_index = -1;
+        }
+    else 
+    {
+        mask_index = sPlatformMove;
+        if (place_meeting (x,y-1,oPlayer))
+        {
+            oPlayer.hsp_carry = hsp;
+        }
+    }
+}
+
+

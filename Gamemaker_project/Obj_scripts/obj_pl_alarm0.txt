@@ -1,0 +1,5 @@
+jumpspeed = jumpspeed_normal;
+jumpspeed_air = jumpspeed_air_nor;
+
+//sprite_index = sPlayer;
+

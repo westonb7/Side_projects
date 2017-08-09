@@ -1,0 +1,5 @@
+if (place_meeting(x,y,oPlayer))
+{
+    scr_player_hit();
+    instance_destroy();
+}

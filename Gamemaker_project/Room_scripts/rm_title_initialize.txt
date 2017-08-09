@@ -1,0 +1,15 @@
+if (audio_is_playing(sd_level1))
+{
+    audio_stop_sound(sd_level1);
+}
+
+if (audio_is_playing(sd_cutscenes_sad))
+{
+    audio_stop_sound(sd_cutscenes_sad);
+}
+
+if (!audio_is_playing(sd_title_screen))
+{
+    audio_play_sound(sd_title_screen,0,20)
+    
+};

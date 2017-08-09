@@ -1,0 +1,1 @@
+draw_sprite(sPlatformMove,0,x,y);

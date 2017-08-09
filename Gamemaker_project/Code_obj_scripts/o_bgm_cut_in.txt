@@ -1,0 +1,35 @@
+if (audio_is_playing(sd_title_screen))
+{
+    audio_stop_sound(sd_title_screen);
+}
+
+if (audio_is_playing(sd_level1))
+{
+    audio_stop_sound(sd_level1);
+}
+
+if (audio_is_playing(sd_level2))
+{
+    audio_stop_sound(sd_level2);
+}
+
+if (audio_is_playing(sd_level3))
+{
+    audio_stop_sound(sd_level3);
+}
+
+if (audio_is_playing(sd_level4))
+{
+    audio_stop_sound(sd_level4);
+}
+
+if (audio_is_playing(sd_level5))
+{
+    audio_stop_sound(sd_level5);
+}
+
+if (!audio_is_playing(sd_cutscenes_lighter))
+{
+    audio_play_sound(sd_cutscenes_lighter,0,20)
+    
+};

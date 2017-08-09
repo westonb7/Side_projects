@@ -1,0 +1,80 @@
+myArrow = instance_create(view_xview + 30,view_yview + 30, oHealth_Arrow);
+
+myHp_01 = instance_create(x,y, oHealth_01);
+myHp_02 = instance_create(x,y, oHealth_02);
+myHp_03 = instance_create(x,y, oHealth_03);
+myHp_04 = instance_create(x,y, oHealth_04);
+if (global.playerMaxHP >= 5)
+{   myHp_05 = instance_create(x,y, oHealth_05); }
+if (global.playerMaxHP >= 6)
+{   myHp_05 = instance_create(x,y, oHealth_06); }
+if (global.playerMaxHP >= 7)
+{   myHp_05 = instance_create(x,y, oHealth_07); }
+if (global.playerMaxHP >= 8)
+{   myHp_05 = instance_create(x,y, oHealth_08); }
+if (global.playerMaxHP >= 9)
+{   myHp_05 = instance_create(x,y, oHealth_09); }
+if (global.playerMaxHP >= 10)
+{   myHp_05 = instance_create(x,y, oHealth_10); }
+
+if (global.colors == 0)
+{
+    if (global.apples > 0)
+    {
+        myApple1 = instance_create(x,y, oApple_red_cut01)
+    }
+    if (global.apples > 1)
+    {
+        myApple1 = instance_create(x,y, oApple_red_cut02)
+    }
+}
+
+if (global.colors == 1)
+{
+    if (global.apples > 0)
+    {
+        myApple1 = instance_create(x,y, oApple_green_cut01)
+    }
+    if (global.apples > 1)
+    {
+        myApple1 = instance_create(x,y, oApple_green_cut02)
+    }
+}
+
+if (global.colors == 2)
+{
+    if (global.apples > 0)
+    {
+        myApple1 = instance_create(x,y, oApple_gold_cut01)
+    }
+    if (global.apples > 1)
+    {
+        myApple1 = instance_create(x,y, oApple_gold_cut02)
+    }
+}
+
+if (global.colors == 3)
+{
+    if (global.apples > 0)
+    {
+        myApple1 = instance_create(x,y, oApple_purple_cut01)
+    }
+    if (global.apples > 1)
+    {
+        myApple1 = instance_create(x,y, oApple_purple_cut02)
+    }
+}
+
+if (global.colors == 4)
+{
+    if (global.apples > 0)
+    {
+        myApple1 = instance_create(x,y, oApple_blue_cut01)
+    }
+    if (global.apples > 1)
+    {
+        myApple1 = instance_create(x,y, oApple_blue_cut02)
+    }
+}
+
+

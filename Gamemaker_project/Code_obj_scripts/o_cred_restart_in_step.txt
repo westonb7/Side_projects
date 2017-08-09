@@ -1,0 +1,12 @@
+key_restart = (max(0,keyboard_check_pressed(ord("R"))))
+key_quit = (max(0,keyboard_check_pressed(ord("Q"))))
+
+if (key_restart == 1)
+{
+    room_goto(1);
+}
+
+if (key_quit == 1)
+{
+    game_end();
+}

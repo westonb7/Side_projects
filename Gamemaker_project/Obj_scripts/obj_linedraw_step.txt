@@ -1,0 +1,2 @@
+draw_set_color(c_red)
+draw_line(100,100,mouse_x,mouse_y);

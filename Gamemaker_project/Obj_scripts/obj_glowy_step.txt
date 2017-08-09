@@ -1,0 +1,6 @@
+if (vsp < 1000)
+{
+    vsp += grav;
+}
+
+y += vsp;

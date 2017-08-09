@@ -1,0 +1,22 @@
+// Creates global variables for use with the checkpoints
+global.checkpoint = noone;
+global.checkpointR = 0;
+global.checkpointx = 0;
+global.checkpointy = 0;
+global.itemFood = 0;
+global.playerMaxHP = 5;
+global.doubleShot = false;
+global.cutScale = 2;
+
+global.colors = 0;
+global.apples = 0;
+
+
+room_goto_next();
+
+enum e_state
+{
+    idle,
+    chase,
+    attack
+};

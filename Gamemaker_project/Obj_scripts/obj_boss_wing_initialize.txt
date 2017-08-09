@@ -1,0 +1,22 @@
+state = e_state.idle;
+
+maxHp = 1;
+maxVsp = 2;
+maxHsp = 2;
+floatSpeed = 0.3;
+vsp = 0;
+grav = 0.2;
+resetOne = true;
+resetTwo = false;
+fireCounter = 0;
+idleCounter = 0;
+fireSpeed = 3;
+just_hit = 0;
+hitPoints = 16;
+sprite_original = sWing_boss;
+fireFreq = 50;
+
+hsp = 0;
+dir = 0;
+movespeed = 0.06;
+slowSpeed = 0.1;

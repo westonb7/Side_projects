@@ -1,0 +1,31 @@
+//pause
+
+depth = 0;
+
+if (mouse_check_button(mb_left) && oPlayer.isReady == true && oPlayer.isDead == 0)
+{
+    lineSpeed=10
+    lineAngle=point_direction(oPlayer.x,oPlayer.y,mouse_x,mouse_y - 40)
+ 
+    lineAx=oPlayer.x
+    lineAy=oPlayer.y
+ 
+    lineMovex=lengthdir_x(lineSpeed,lineAngle)
+    lineMovey=lengthdir_y(lineSpeed,lineAngle)
+ 
+    for(i=0; i<500; i+=1)
+    {
+        lastx=lineAx
+        lasty=lineAy
+    
+        lineAx+=lineMovex
+        lineAy+=lineMovey
+    
+        lineMovey+=0.2
+    
+        draw_set_color(c_red);
+        draw_line(lastx,lasty,lineAx,lineAy)
+    }
+}
+
+

@@ -1,0 +1,12 @@
+// pause
+
+
+if (numBounces == 3)
+{
+    instance_destroy();
+} 
+
+if (vsp < 1000)
+{ vsp += grav; }
+
+y += vsp;

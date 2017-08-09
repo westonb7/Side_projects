@@ -1,0 +1,13 @@
+// safety check
+
+if (instance_exists(oPlayer))
+{
+    if (round(oPlayer.y + (oPlayer.sprite_height/2.5)) > y) || (oPlayer.key_down) 
+    {
+        mask_index = -1;
+    }
+    else 
+    {
+        mask_index = sPlatform;
+    }
+}
